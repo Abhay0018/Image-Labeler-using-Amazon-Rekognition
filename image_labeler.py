@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 def detect_labels(photo, bucket):
-    client = boto3.client('rekognition')
+    client = boto3.client('rekognition', region_name='ap-south-1')
 
     response = client.detect_labels(
         Image={'S3Object': {'Bucket': bucket, 'Name': photo}},
@@ -21,7 +21,7 @@ def detect_labels(photo, bucket):
         print()
 
     # Load the image from S3
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource('s3', region_name='ap-south-1')
     obj = s3.Object(bucket, photo)
     img_data = obj.get()['Body'].read()
     img = Image.open(BytesIO(img_data))
@@ -50,8 +50,8 @@ def detect_labels(photo, bucket):
     return len(response['Labels'])
 
 def main():
-    photo = 'image_file_name'
-    bucket = 'bucket_name'
+    photo = 'example_image.png'
+    bucket = 'image-labeler-using-rekognition-bucket'
     label_count = detect_labels(photo, bucket)
     print("Labels detected:", label_count)
 
