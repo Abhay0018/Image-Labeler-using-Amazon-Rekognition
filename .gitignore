@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# AWS / secrets
+.env
+.env.*
+.aws/
+*.pem
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
